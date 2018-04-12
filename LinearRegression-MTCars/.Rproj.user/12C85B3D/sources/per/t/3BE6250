@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1523561381714.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1366522002",
+    "id" : "3BE6250",
+    "lastKnownWriteTime" : 1523565179,
+    "last_content_update" : 1523565180303,
+    "path" : "~/GitHub/R-Classification-Project1/LinearRegression-MTCars/LR-MTCAR code.R",
+    "project_path" : "LR-MTCAR code.R",
+    "properties" : {
+        "cursorPosition" : "11,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
