@@ -79,18 +79,18 @@ BIC(fit)
 #Variable selection using different methods
 #Stepwise Selection based on AIC
 library(MASS)
-step <- stepAIC(fit, direction="both")
-summary(step)
+step1 <- stepAIC(fit, direction="both")
+summary(step1)
 
 
 #Backward Selection based on AIC
-step <- stepAIC(fit, direction="backward")
-summary(step)
+step2 <- stepAIC(fit, direction="backward")
+summary(step2)
 
 
 #Forward Selection based on AIC
-step <- stepAIC(fit, direction="forward")
-summary(step)
+step3 <- stepAIC(fit, direction="forward")
+summary(step3)
 
 
 #Stepwise Selection with BIC
@@ -101,44 +101,7 @@ summary(stepBIC)
 AIC(stepBIC)
 BIC(stepBIC)
 
-#calculating standerd coeficient
-#Standardised coefficients
-library(QuantPsyc)
-lm.beta(stepBIC)
-
-
-#R Function : Manual Calculation of Standardised coefficients
-stdz.coff <- function (regmodel)
-{ b <- summary(regmodel)$coef[-1,1]
-sx <- sapply(regmodel$model[-1], sd)
-sy <- sapply(regmodel$model[1], sd)
-beta <- b * sx / sy
-return(beta)
-}
-
-std.Coeff = data.frame(Standardized.Coeff = stdz.coff(stepBIC))
-std.Coeff = cbind(Variable = row.names(std.Coeff), std.Coeff)
-row.names(std.Coeff) = NULL
-
-#Calculating Variance Inflation Factor (VIF)
 vif(stepBIC)
-
-#testing other assumption
-#Autocorrelation Test
-durbinWatsonTest(stepBIC)
-#Normality Of Residuals (Should be > 0.05)
-res=residuals(stepBIC,type="pearson")
-shapiro.test(res)
-#Testing for heteroscedasticity (Should be > 0.05)
-ncvTest(stepBIC)
-#Outliers – Bonferonni test
-outlierTest(stepBIC)
-#See Residuals
-resid = residuals(stepBIC)
-#Relative Importance
-install.packages("relaimpo")
-library(relaimpo)
-calc.relimp(stepBIC)
 
 #See Predicted Value
 pred = predict(stepBIC,dat3)
@@ -147,27 +110,9 @@ finaldata = cbind(mtcars,pred)
 print(head(subset(finaldata, select = c(mpg,pred))))
 
 
-#Other useful functions
-#Calculating RMSE
-rmse = sqrt(mean((dat3$mpg - pred)^2))
-print(rmse)
-
-#Calculating Rsquared manually
-y = dat3[,c("mpg")]
-R.squared = 1 - sum((y-pred)^2)/sum((y-mean(y))^2)
-print(R.squared)
-
-#Calculating Adj. Rsquared manually
-n = dim(dat3)[1]
-p = dim(summary(stepBIC)$coeff)[1] - 1
-adj.r.squared = 1 - (1 - R.squared) * ((n - 1)/(n-p-1))
-print(adj.r.squared)
-
-#Box Cox Transformation
-library(lmSupport)
-modelBoxCox(stepBIC)
 
 
 #K fold cross validation
+install.packages("DAAG")
 library(DAAG)
 kfold = cv.lm(data=dat3, stepBIC, m=5)
