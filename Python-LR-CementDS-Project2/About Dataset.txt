@@ -1,0 +1,11 @@
+Dataset used:
+We have 1030 observations on 9 variables. We try to estimate the Complete compressive strength(CRS) using:
+
+Cement - kg in a m3 mixture
+Blast Furnace Slag - kg in a m3 mixture
+Fly Ash - kg in a m3 mixture
+Water - kg in a m3 mixture
+Superplasticizer - kg in a m3 mixture
+Coarse Aggregate - kg in a m3 mixture
+Fine Aggregate - kg in a m3 mixture
+Age - Day (1-365)
